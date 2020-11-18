@@ -6,15 +6,13 @@
 /*   By: mharriso <mharriso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 03:02:15 by mharriso          #+#    #+#             */
-/*   Updated: 2020/11/15 03:17:45 by mharriso         ###   ########.fr       */
+/*   Updated: 2020/11/18 06:30:17 by mharriso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strchr(const char *str, int c)
+int get_next_line(int fd, char **line);
 {
-	while (*str != c && *str)
-		str++;
-	return ((*str == c) ? (char *)str : 0);
+	return 0;
 }

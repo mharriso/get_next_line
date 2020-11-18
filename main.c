@@ -4,7 +4,7 @@
 
 int main()
 {
-	int fd = open("file", O_RDONLY);
+	int fd = open("one_line.txt", O_RDONLY);
 	char *line;
 	int i;
 	while((i = get_next_line(fd, &line)))
