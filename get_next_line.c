@@ -23,7 +23,7 @@ int	save_next_line(char *buffer, char **line)
 
 	if((new_line = ft_strchr(buffer, '\n')))
 		*new_line = '\0';
-	if(!(update_line = ft_strjoin(buffer, *line)))
+	if(!(update_line = ft_strjoin(*line, buffer)))
 		return (-1);
 	free(*line);
 	*line = update_line;

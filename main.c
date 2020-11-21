@@ -9,7 +9,7 @@ int main()
 	int i;
 	while((i = get_next_line(fd, &line)))
 	{
-		printf("i = %d %s\n", i, line);
+		printf("i = %d %s$\n", i, line);
 		free(line);
 	}
 	printf("i = %d %s\n", i, line);
