@@ -18,6 +18,11 @@
 #  define BUFFER_SIZE 32
 # endif
 
-int	get_next_line(int fd, char **line);
+int     get_next_line(int fd, char **line);
+size_t	ft_strlen(const char *s);
+char	*ft_strjoin(char const *s1, char const *s2);
+void	*ft_memcpy(void *dest, const void *source, size_t count);
+char	*ft_strchr(const char *str, int c);
+
 
 #endif

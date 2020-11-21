@@ -55,16 +55,17 @@ char		*ft_strjoin(char const *s1, char const *s2)
 	return (s);
 }
 
-int main()
+void	*ft_memcpy(void *dest, const void *source, size_t count)
 {
-	char *s1;
-	char *s2;
+	size_t			i;
 
-	s1 = "123456";
-	s2 = "789";
-	s1 = ft_strjoin(s1, s2);
-	printf("%s\n", s1);
-	return 0;
-
-
+	i = 0;
+	if (dest == source)
+		return (dest);
+	while (i < count)
+	{
+		((unsigned char*)dest)[i] = ((const unsigned char*)source)[i];
+		i++;
+	}
+	return (dest);
 }

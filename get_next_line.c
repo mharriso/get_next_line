@@ -12,14 +12,43 @@
 
 #include "get_next_line.h"
 
+int cut_next_line(char *buffer, char *new_line)
+{
+	return 0;
+}
+int	save_next_line(char *buffer, char **line)
+{
+	char	*new_line;
+	char	*update_line;
+
+	if((new_line = ft_strchr(buffer, '\n')))
+		*new_line = '\0';
+	if(!(update_line = ft_strjoin(buffer, *line)))
+		return (-1);
+	free(*line);
+	*line = update_line;
+	return (new_line) ? 1 : 0;
+}
+
 int	get_next_line(int fd, char **line)
 {
-	char *ptr;
-	while((ptr = strchr(line, '\n') == NULL))
-	{
-		read(fd, line, BUFFER_SIZE);
-		if()
-	}
+	static char	*cache;
+	char		buffer[BUFFER_SIZE + 1];
+	int			res;			
 
-	return 0;
+	if(!(*line = malloc(sizeof(char))))
+		return (-1);
+	**line = '\0';
+	while((res = read(fd, buffer, BUFFER_SIZE)) > 0)
+	{
+		buffer[res] = '\0';
+		res = save_next_line(buffer, line);
+		if(res != 0)
+			break ;
+	}
+	if(res == -1)
+	{
+		free(*line);
+	}
+	return (res);
 }
