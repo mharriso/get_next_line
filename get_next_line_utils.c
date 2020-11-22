@@ -6,7 +6,7 @@
 /*   By: mharriso <mharriso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 03:02:15 by mharriso          #+#    #+#             */
-/*   Updated: 2020/11/18 01:25:50 by mharriso         ###   ########.fr       */
+/*   Updated: 2020/11/21 23:26:47 by mharriso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,17 +55,19 @@ char		*ft_strjoin(char const *s1, char const *s2)
 	return (s);
 }
 
-void	*ft_memcpy(void *dest, const void *source, size_t count)
+char		*ft_strdup(const char *str)
 {
-	size_t			i;
+	size_t	i;
+	char	*dup;
 
+	if (!(dup = malloc(ft_strlen(str) + 1 * sizeof(char))))
+		return (NULL);
 	i = 0;
-	if (dest == source)
-		return (dest);
-	while (i < count)
+	while (str[i])
 	{
-		((unsigned char*)dest)[i] = ((const unsigned char*)source)[i];
+		dup[i] = str[i];
 		i++;
 	}
-	return (dest);
+	dup[i] = '\0';
+	return (dup);
 }

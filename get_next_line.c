@@ -6,17 +6,17 @@
 /*   By: mharriso <mharriso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 00:31:51 by mharriso          #+#    #+#             */
-/*   Updated: 2020/11/18 01:29:35 by mharriso         ###   ########.fr       */
+/*   Updated: 2020/11/21 23:19:14 by mharriso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int cut_next_line(char *buffer, char *new_line)
+int cut_next_line(char *buffer, char *new_line, char *cache)
 {
 	return 0;
 }
-int	save_next_line(char *buffer, char **line)
+int	save_next_line(char *buffer, char **line, char *cache)
 {
 	char	*new_line;
 	char	*update_line;
@@ -27,6 +27,8 @@ int	save_next_line(char *buffer, char **line)
 		return (-1);
 	free(*line);
 	*line = update_line;
+	if(new_line)
+		cut_next_line(buffer, new_line, cache);
 	return (new_line) ? 1 : 0;
 }
 
@@ -34,7 +36,7 @@ int	get_next_line(int fd, char **line)
 {
 	static char	*cache;
 	char		buffer[BUFFER_SIZE + 1];
-	int			res;			
+	int			res;
 
 	if(!(*line = malloc(sizeof(char))))
 		return (-1);
@@ -47,8 +49,6 @@ int	get_next_line(int fd, char **line)
 			break ;
 	}
 	if(res == -1)
-	{
 		free(*line);
-	}
 	return (res);
 }
