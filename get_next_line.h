@@ -6,7 +6,7 @@
 /*   By: mharriso <mharriso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 03:02:25 by mharriso          #+#    #+#             */
-/*   Updated: 2020/11/21 23:27:32 by mharriso         ###   ########.fr       */
+/*   Updated: 2020/11/24 22:39:02 by mharriso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 5
+#  define BUFFER_SIZE 2
 # endif
 
 int		get_next_line(int fd, char **line);
