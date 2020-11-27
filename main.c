@@ -15,8 +15,8 @@ int main()
 		printf("i = %d %s%s\n", i, line, DOLLAR);
 		free(line);
 	}
-	printf("i = %d %s\n", i, line);
-		free(line);
+	printf("i = %d %s%s\n", i, line, DOLLAR);
+	free(line);
 	//for(;;)
 	return (0);
 }

@@ -6,13 +6,13 @@
 /*   By: mharriso <mharriso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 00:31:51 by mharriso          #+#    #+#             */
-/*   Updated: 2020/11/26 05:56:39 by mharriso         ###   ########.fr       */
+/*   Updated: 2020/11/27 05:15:26 by mharriso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int cut_cache_line(char *new_line, char *cache)
+int save_cache_line(char *new_line, char *cache)
 {
 	char *update_cache;
 
@@ -40,7 +40,7 @@ int	save_next_line(char *buffer, char **line, char *cache)
 		return (-1);
 	free(*line);
 	*line = update_line;
-	return (cut_cache_line(new_line, cache));
+	return (new_line) ? 1 : 0;
 }
 
 int	get_next_line(int fd, char **line)
@@ -49,17 +49,15 @@ int	get_next_line(int fd, char **line)
 	char		buffer[BUFFER_SIZE + 1];
 	int			res;
 
-	if(!(*line = ft_strdup("")))
+	if(!(*line = ft_strjoin("", "")))
 		return (-1);
-	res = save_next_line(cache, line, cache);
-	if(res == 0)
-		while((res = read(fd, buffer, BUFFER_SIZE)) > 0)
-		{
-			buffer[res] = '\0';
-			res = save_next_line(buffer, line, cache);
-			if(res != 0)
-				break ;
-		}
+	while((res = read(fd, buffer, BUFFER_SIZE)) > 0)
+	{
+		buffer[res] = '\0';
+		res = save_next_line(buffer, line, cache);
+		if(res != 0)
+			break ;
+	}
 	if(res == -1)
 	{
 		free(cache);
@@ -67,3 +65,4 @@ int	get_next_line(int fd, char **line)
 	}
 	return (res);
 }
+
