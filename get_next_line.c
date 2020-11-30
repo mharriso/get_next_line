@@ -6,7 +6,7 @@
 /*   By: mharriso <mharriso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 00:31:51 by mharriso          #+#    #+#             */
-/*   Updated: 2020/11/29 03:56:23 by mharriso         ###   ########.fr       */
+/*   Updated: 2020/11/30 16:25:33 by mharriso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,22 +41,26 @@ int	save_next_line(char *buffer, char **line, char **cache)
 	free(*line);
 	*line = update_line;
 	save_cache_line(new_line, cache);
-	return (new_line) ? 1 : 0;
+	return ((new_line) ? 1 : 0);
 }
 
 int	get_next_line(int fd, char **line)
 {
-	static char	*cache = NULL;
+	static char	*cache;
 	char		buffer[BUFFER_SIZE + 1];
 	int			res;
 
-	//printf(YELLOW"cache = %s\n"RESET, cache);
+	if(fd < 0 || BUFFER_SIZE < 1 || !line)
+	{
+		free(cache);
+		return (-1);
+	}
+	*line = NULL;
 	if(!(*line = ft_strjoin("", "")))
 		return (-1);
-
 	if((res = save_next_line(cache, line, &cache)) == 1)
-		return res;
-	//printf("res = %d\n", res);
+		return (res);
+
 	while((res = read(fd, buffer, BUFFER_SIZE)) > 0)
 	{
 		buffer[res] = '\0';
@@ -68,6 +72,11 @@ int	get_next_line(int fd, char **line)
 	{
 		free(cache);
 		free(*line);
+	}
+	if(res == 0)
+	{
+		free(cache);
+		cache = NULL;
 	}
 	return (res);
 }

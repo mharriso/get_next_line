@@ -6,7 +6,7 @@
 /*   By: mharriso <mharriso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 03:02:25 by mharriso          #+#    #+#             */
-/*   Updated: 2020/11/29 03:58:30 by mharriso         ###   ########.fr       */
+/*   Updated: 2020/11/30 15:44:01 by mharriso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 2
+#  define BUFFER_SIZE 1
 # endif
 
 #include <stdio.h> 				//delete
@@ -28,10 +28,8 @@
 
 
 int		get_next_line(int fd, char **line);
-size_t	ft_strlen(const char *s);
 char	*ft_strjoin(char const *s1, char const *s2);
-void	*ft_memcpy(void *dest, const void *source, size_t count);
+size_t	ft_strlen(const char *s);
 char	*ft_strchr(const char *str, int c);
-char	*ft_strdup(const char *str);
 
 #endif
