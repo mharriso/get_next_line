@@ -6,7 +6,7 @@
 /*   By: mharriso <mharriso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 00:31:51 by mharriso          #+#    #+#             */
-/*   Updated: 2020/11/29 03:56:23 by mharriso         ###   ########.fr       */
+/*   Updated: 2020/11/30 19:51:49 by mharriso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,16 @@ int	get_next_line(int fd, char **line)
 	char		buffer[BUFFER_SIZE + 1];
 	int			res;
 
-	//printf(YELLOW"cache = %s\n"RESET, cache);
+
+	if(fd < 0 || BUFFER_SIZE < 1 || !line)
+		return (-1);
+	*line = NULL;
 	if(!(*line = ft_strjoin("", "")))
 		return (-1);
 
 	if((res = save_next_line(cache, line, &cache)) == 1)
 		return res;
-	//printf("res = %d\n", res);
+
 	while((res = read(fd, buffer, BUFFER_SIZE)) > 0)
 	{
 		buffer[res] = '\0';
@@ -68,6 +71,11 @@ int	get_next_line(int fd, char **line)
 	{
 		free(cache);
 		free(*line);
+	}
+	if(res == 0)
+	{
+		free(cache);
+		cache = NULL;
 	}
 	return (res);
 }

@@ -6,7 +6,7 @@
 /*   By: mharriso <mharriso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 03:02:25 by mharriso          #+#    #+#             */
-/*   Updated: 2020/11/29 03:58:30 by mharriso         ###   ########.fr       */
+/*   Updated: 2020/11/30 19:24:57 by mharriso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 2
+#  define BUFFER_SIZE 1000
 # endif
 
 #include <stdio.h> 				//delete
