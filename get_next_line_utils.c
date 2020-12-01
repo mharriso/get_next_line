@@ -6,15 +6,13 @@
 /*   By: mharriso <mharriso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 03:02:15 by mharriso          #+#    #+#             */
-/*   Updated: 2020/11/30 18:51:06 by mharriso         ###   ########.fr       */
+/*   Updated: 2020/11/30 20:59:17 by mharriso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-#include <stdio.h>
-
-size_t	ft_strlen(const char *s)
+static	size_t	ft_strlen(const char *s)
 {
 	size_t i;
 
@@ -24,14 +22,14 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-char	*ft_strchr(const char *str, int c)
+char			*ft_strchr(const char *str, int c)
 {
 	while (*str != c && *str)
 		str++;
 	return ((*str == c) ? (char *)str : NULL);
 }
 
-char		*ft_strjoin(char const *s1, char const *s2)
+char			*ft_strjoin(char const *s1, char const *s2)
 {
 	size_t		len;
 	char		*s;

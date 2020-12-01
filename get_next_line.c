@@ -6,77 +6,68 @@
 /*   By: mharriso <mharriso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 00:31:51 by mharriso          #+#    #+#             */
-/*   Updated: 2020/11/30 19:51:49 by mharriso         ###   ########.fr       */
+/*   Updated: 2020/12/01 16:50:33 by mharriso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int save_cache_line(char *new_line, char **cache)
+static	int	save_cache_line(char *new_line, char **cache)
 {
 	char *update_cache;
 
-	if(!new_line)
+	if (!new_line)
 		return (0);
 	update_cache = NULL;
-	if(*(new_line + 1) != '\0')
-		if(!(update_cache = ft_strjoin(new_line + 1, "")))
+	if (*(new_line + 1) != '\0')
+		if (!(update_cache = ft_strjoin(new_line + 1, "")))
 			return (-1);
 	free(*cache);
 	*cache = update_cache;
-	return (1);
+	return ((new_line) ? 1 : 0);
 }
 
-int	save_next_line(char *buffer, char **line, char **cache)
+static	int	save_next_line(char *buffer, char **line, char **cache)
 {
 	char	*new_line;
 	char	*update_line;
 
-	if(!buffer)
-		return 0;
-	if((new_line = ft_strchr(buffer, '\n')))
+	if (!buffer)
+		return (0);
+	if ((new_line = ft_strchr(buffer, '\n')))
 		*new_line = '\0';
-	if(!(update_line = ft_strjoin(*line, buffer)))
+	if (!(update_line = ft_strjoin(*line, buffer)))
 		return (-1);
 	free(*line);
 	*line = update_line;
-	save_cache_line(new_line, cache);
-	return (new_line) ? 1 : 0;
+	return (save_cache_line(new_line, cache));
 }
 
-int	get_next_line(int fd, char **line)
+int			get_next_line(int fd, char **line)
 {
 	static char	*cache = NULL;
 	char		buffer[BUFFER_SIZE + 1];
 	int			res;
 
-
-	if(fd < 0 || BUFFER_SIZE < 1 || !line)
+	if (fd < 0 || BUFFER_SIZE < 1 || !line)
 		return (-1);
-	*line = NULL;
-	if(!(*line = ft_strjoin("", "")))
+	if (!(*line = ft_strjoin("", "")))
 		return (-1);
-
-	if((res = save_next_line(cache, line, &cache)) == 1)
-		return res;
-
-	while((res = read(fd, buffer, BUFFER_SIZE)) > 0)
+	if ((res = save_next_line(cache, line, &cache)) == 1)
+		return (res);
+	while ((res = read(fd, buffer, BUFFER_SIZE)) > 0)
 	{
 		buffer[res] = '\0';
 		res = save_next_line(buffer, line, &cache);
-		if(res != 0)
+		if (res != 0)
 			break ;
 	}
-	if(res == -1)
+	if (res == -1 || res == 0)
 	{
 		free(cache);
-		free(*line);
-	}
-	if(res == 0)
-	{
-		free(cache);
+		if (res == -1)
+			free(*line);
 		cache = NULL;
 	}
 	return (res);
 }
-

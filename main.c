@@ -1,7 +1,13 @@
 #include <fcntl.h>
 #include <string.h>
 #include "get_next_line.h"
-
+#include <stdio.h>
+#define RESET   "\033[0m"
+#define GREEN   "\033[32m"
+#define MAGENTA "\033[35;1m"
+#define YELLOW  "\033[33m"
+#define BLUE    "\033[34m"
+#define DOLLAR GREEN"$" RESET
 
 int	test_gnl(int fd, char *line)
 {

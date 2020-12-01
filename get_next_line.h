@@ -6,7 +6,7 @@
 /*   By: mharriso <mharriso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 03:02:25 by mharriso          #+#    #+#             */
-/*   Updated: 2020/11/30 19:24:57 by mharriso         ###   ########.fr       */
+/*   Updated: 2020/11/30 20:20:47 by mharriso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,8 @@
 #  define BUFFER_SIZE 1000
 # endif
 
-#include <stdio.h> 				//delete
-#define RESET   "\033[0m"
-#define GREEN   "\033[32m"
-#define MAGENTA "\033[35;1m"
-#define YELLOW  "\033[33m"
-#define BLUE    "\033[34m"
-#define DOLLAR GREEN"$" RESET 	//delete
-
-
 int		get_next_line(int fd, char **line);
-size_t	ft_strlen(const char *s);
 char	*ft_strjoin(char const *s1, char const *s2);
-void	*ft_memcpy(void *dest, const void *source, size_t count);
 char	*ft_strchr(const char *str, int c);
-char	*ft_strdup(const char *str);
 
 #endif
