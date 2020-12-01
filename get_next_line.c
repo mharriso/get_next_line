@@ -6,31 +6,17 @@
 /*   By: mharriso <mharriso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 00:31:51 by mharriso          #+#    #+#             */
-/*   Updated: 2020/12/01 16:52:45 by mharriso         ###   ########.fr       */
+/*   Updated: 2020/12/01 23:18:07 by mharriso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static	int	save_cache_line(char *new_line, char **cache)
-{
-	char *update_cache;
-
-	if (!new_line)
-		return (0);
-	update_cache = NULL;
-	if (*(new_line + 1) != '\0')
-		if (!(update_cache = ft_strjoin(new_line + 1, "")))
-			return (-1);
-	free(*cache);
-	*cache = update_cache;
-	return ((new_line) ? 1 : 0);
-}
-
 static	int	save_next_line(char *buffer, char **line, char **cache)
 {
 	char	*new_line;
 	char	*update_line;
+	char	*update_cache;
 
 	if (!buffer)
 		return (0);
@@ -40,19 +26,24 @@ static	int	save_next_line(char *buffer, char **line, char **cache)
 		return (-1);
 	free(*line);
 	*line = update_line;
-	return (save_cache_line(new_line, cache));
+	update_cache = NULL;
+	if (new_line && *(new_line + 1) != '\0')
+		if (!(update_cache = ft_strdup(new_line + 1)))
+			return (-1);
+	free(*cache);
+	*cache = update_cache;
+	return ((new_line) ? 1 : 0);
 }
 
 int			get_next_line(int fd, char **line)
 {
-	static char	*cache;
+	static char	*cache = NULL;
 	char		buffer[BUFFER_SIZE + 1];
 	int			res;
 
-	if (fd < 0 || BUFFER_SIZE < 1 || !line)
+	if (fd < 0 || BUFFER_SIZE < 1 || !line || !(*line = (char *)malloc(1)))
 		return (-1);
-	if (!(*line = ft_strjoin("", "")))
-		return (-1);
+	**line = '\0';
 	if ((res = save_next_line(cache, line, &cache)) == 1)
 		return (res);
 	while ((res = read(fd, buffer, BUFFER_SIZE)) > 0)
@@ -64,13 +55,8 @@ int			get_next_line(int fd, char **line)
 	}
 	if (res == -1 || res == 0)
 	{
-		free(cache);
 		if (res == -1)
 			free(*line);
-		cache = NULL;
-	}
-	if(res == 0)
-	{
 		free(cache);
 		cache = NULL;
 	}
