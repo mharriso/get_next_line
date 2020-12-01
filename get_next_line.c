@@ -6,7 +6,7 @@
 /*   By: mharriso <mharriso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 00:31:51 by mharriso          #+#    #+#             */
-/*   Updated: 2020/12/01 16:50:33 by mharriso         ###   ########.fr       */
+/*   Updated: 2020/12/01 16:52:45 by mharriso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static	int	save_next_line(char *buffer, char **line, char **cache)
 
 int			get_next_line(int fd, char **line)
 {
-	static char	*cache = NULL;
+	static char	*cache;
 	char		buffer[BUFFER_SIZE + 1];
 	int			res;
 
@@ -67,6 +67,11 @@ int			get_next_line(int fd, char **line)
 		free(cache);
 		if (res == -1)
 			free(*line);
+		cache = NULL;
+	}
+	if(res == 0)
+	{
+		free(cache);
 		cache = NULL;
 	}
 	return (res);
