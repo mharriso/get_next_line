@@ -1,6 +1,7 @@
 #include <fcntl.h>
 #include <string.h>
 #include "get_next_line.h"
+//#include "get_next_line_bonus.h"
 #include <stdio.h>
 #define RESET   "\033[0m"
 #define GREEN   "\033[32m"
@@ -29,7 +30,7 @@ int	test_gnl(int fd, char *line)
 int main()
 {
 	int fd[10];
-	char *line;
+	char *line = NULL;
 
 	fd[0] = open("alphabet.txt", O_RDONLY);
 	fd[1] = open("all_i_ask.txt", O_RDONLY);
