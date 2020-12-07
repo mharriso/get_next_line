@@ -6,7 +6,7 @@
 /*   By: mharriso <mharriso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 03:02:15 by mharriso          #+#    #+#             */
-/*   Updated: 2020/12/01 23:31:41 by mharriso         ###   ########.fr       */
+/*   Updated: 2020/12/03 16:46:20 by mharriso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,21 +51,4 @@ char			*ft_strjoin(char const *s1, char const *s2)
 	}
 	s[i] = '\0';
 	return (s);
-}
-
-char			*ft_strdup(const char *str)
-{
-	size_t	i;
-	char	*dup;
-
-	if (!(dup = malloc(ft_strlen(str) + 1 * sizeof(char))))
-		return (NULL);
-	i = 0;
-	while (str[i])
-	{
-		dup[i] = str[i];
-		i++;
-	}
-	dup[i] = '\0';
-	return (dup);
 }

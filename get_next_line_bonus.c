@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mharriso <mharriso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/03 16:55:06 by mharriso          #+#    #+#             */
-/*   Updated: 2020/12/03 16:55:08 by mharriso         ###   ########.fr       */
+/*   Created: 2020/11/15 00:31:51 by mharriso          #+#    #+#             */
+/*   Updated: 2020/12/04 16:05:28 by mharriso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
-static	int	save_next_line(char *buffer, char **line, char **cache)
+static	int		save_next_line(char *buffer, char **line, char **cache)
 {
 	char	*new_line;
 	char	*tmp;
@@ -34,21 +34,22 @@ static	int	save_next_line(char *buffer, char **line, char **cache)
 	return ((new_line) ? 1 : 0);
 }
 
-int			get_next_line(int fd, char **line)
+int				get_next_line(int fd, char **line)
 {
-	static char	*cache = NULL;
+	static char	*cache[1024] = {NULL};
 	char		buffer[BUFFER_SIZE + 1];
 	int			res;
 
-	if (fd < 0 || BUFFER_SIZE < 1 || !line || !(*line = (char *)malloc(1)))
+	if (fd < 0 || fd > 1023 || BUFFER_SIZE < 1 || !line
+	|| !(*line = (char *)malloc(1)))
 		return (-1);
 	**line = '\0';
-	if ((res = save_next_line(cache, line, &cache)) == 1)
+	if ((res = save_next_line(cache[fd], line, &cache[fd])) == 1)
 		return (res);
 	while ((res = read(fd, buffer, BUFFER_SIZE)) > 0)
 	{
 		buffer[res] = '\0';
-		res = save_next_line(buffer, line, &cache);
+		res = save_next_line(buffer, line, &cache[fd]);
 		if (res != 0)
 			break ;
 	}
@@ -56,8 +57,8 @@ int			get_next_line(int fd, char **line)
 	{
 		if (res == -1)
 			free(*line);
-		free(cache);
-		cache = NULL;
+		free(cache[fd]);
+		cache[fd] = NULL;
 	}
 	return (res);
 }

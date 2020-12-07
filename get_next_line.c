@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mharriso <mharriso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/15 00:31:51 by mharriso          #+#    #+#             */
-/*   Updated: 2020/12/01 23:18:07 by mharriso         ###   ########.fr       */
+/*   Created: 2020/12/03 16:55:06 by mharriso          #+#    #+#             */
+/*   Updated: 2020/12/03 16:55:08 by mharriso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,22 @@
 static	int	save_next_line(char *buffer, char **line, char **cache)
 {
 	char	*new_line;
-	char	*update_line;
-	char	*update_cache;
+	char	*tmp;
 
 	if (!buffer)
 		return (0);
 	if ((new_line = ft_strchr(buffer, '\n')))
 		*new_line = '\0';
-	if (!(update_line = ft_strjoin(*line, buffer)))
+	if (!(tmp = ft_strjoin(*line, buffer)))
 		return (-1);
 	free(*line);
-	*line = update_line;
-	update_cache = NULL;
+	*line = tmp;
+	tmp = NULL;
 	if (new_line && *(new_line + 1) != '\0')
-		if (!(update_cache = ft_strdup(new_line + 1)))
+		if (!(tmp = ft_strjoin(new_line + 1, "")))
 			return (-1);
 	free(*cache);
-	*cache = update_cache;
+	*cache = tmp;
 	return ((new_line) ? 1 : 0);
 }
 
