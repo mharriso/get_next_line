@@ -29,22 +29,24 @@ int main()
 	fd[0] = open("alphabet.txt", O_RDONLY);
 	fd[1] = open("all_i_ask.txt", O_RDONLY);
 	fd[2] = open("empty.txt", O_RDONLY);
-	fd[3] = open("file0.txt", O_RDONLY);
-	//fd[4] = open("fail.txt", O_RDONLY);
-	fd[4] = open("file0.txt", O_RDONLY);
+	fd[3] = open("file.txt", O_RDONLY);
+	fd[4] = open("fail.txt", O_RDONLY);
+	fd[5] = open("christmas_tree.txt", O_RDONLY);
 
 
 	while (amt != 5)
 	{
 		amt = 0;
-		for(int i = 0; i < 5; i++)
+		for(int i = 0; i < 6; i++)
 		{
 			res = get_next_line(fd[i], &line);
 			amt += (res == 0);
 			if(res > 0)
-				//printf(MAGENTA"\n********************************** ( fd %d ) *********************************"RESET"\n\n", fd[i]),
+			{
+				printf(MAGENTA"\n********************************** ( fd %d ) *********************************"RESET"\n\n", fd[i]),
 				printf("i = %d %s%s\n", res, line, DOLLAR);
-			free(line);
+				free(line);
+			}
 		}
 	}
 	//while(1){}

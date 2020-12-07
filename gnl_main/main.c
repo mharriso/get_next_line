@@ -35,9 +35,9 @@ int main()
 	fd[0] = open("alphabet.txt", O_RDONLY);
 	fd[1] = open("all_i_ask.txt", O_RDONLY);
 	fd[2] = open("empty.txt", O_RDONLY);
-	fd[3] = open("file0.txt", O_RDONLY);
+	fd[3] = open("file.txt", O_RDONLY);
 	fd[4] = open("fail.txt", O_RDONLY);
-	fd[5] = open("file0.txt", O_RDONLY);
+	fd[5] = open("christmas_tree.txt", O_RDONLY);
 
 	for(int i = 0; i < 6; i++)
 		test_gnl(fd[i], line);
