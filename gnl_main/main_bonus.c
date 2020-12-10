@@ -12,7 +12,7 @@
 
 int	test_gnl(int fd, char *line)
 {
-	int i;
+	int i = 0;
 	printf(MAGENTA"\n********************************** ( fd %d ) *********************************"RESET"\n\n", fd);
 	get_next_line(fd, &line);
 	printf("i = %d %s%s\n", i, line, DOLLAR);
