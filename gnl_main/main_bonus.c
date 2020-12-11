@@ -41,12 +41,13 @@ int main()
 		{
 			res = get_next_line(fd[i], &line);
 			amt += (res == 0);
-			if(res > 0)
+			if (res > 0)
 			{
 				printf(MAGENTA"\n********************************** ( fd %d ) *********************************"RESET"\n\n", fd[i]),
 				printf("i = %d %s%s\n", res, line, DOLLAR);
-				free(line);
 			}
+			if (res != -1)
+				free(line);
 		}
 	}
 	//while(1){}
