@@ -1,6 +1,4 @@
 
-#include "get_next_line.h"
-
 int	get_next_line(int fd, char **line)
 {
 	char		buffer[BUFFER_SIZE + 1];
@@ -15,9 +13,9 @@ int	get_next_line(int fd, char **line)
 		buffer[res] = '\0';
 		if (*buffer == '\n')
 			return (1);
+		res = 0;
 		if (!(tmp = ft_strjoin(*line, buffer)))
 			res = -1;
-		res = 0;
 		free(*line);
 		*line = tmp;
 		if (res != 0)
