@@ -41,3 +41,4 @@
 *.su
 *.idb
 *.pdb
+.DS_Store
